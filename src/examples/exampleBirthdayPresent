@@ -1,0 +1,38 @@
+Search
+# propositions:
+# At(Father, Home) = h
+# At(Present, PostOffice1) = pl #LaPoste l
+# At(Present, PostOffice2) = pf #Friends f
+# At(Father, l) = l
+# At(Father, f) = f
+# Has(Father, Present) = s
+# Wrapped(Present) = w
+#
+# actions:
+# Go(Father, Home, PO1) = GoFatherHomePO1
+# Go(Father, Home, PO2) = GoFatherHomePO2
+# Go(Father, PO2, Home) = GoFatherPO2Home
+# Go(Father, PO1, Home) = GoFatherPO1Home
+# Go(Father, PO2, PO1) = GoFatherPO2PO1
+# Go(Father, PO1, PO2) = GoFatherPO1PO2
+# TryPickUp(Father, Present, PO1) = TryPickUpPresentPO1
+# TryPickUp(Father, Present, PO2) = TryPickUpPresentPO2
+# TryPickUpfail(Father, Present, PO1) = TryPickUpPresentPO1fails
+# TryPickUpfail(Father, Present, PO2) = TryPickUpPresentPO2fails
+# Wrap(Father, Present) = WrapPresent
+#
+{"M":["W","Rmf","L"], "Wd":["PresentPO2"], "W":["PresentPO2","PresentPO1"], "Rmf":[["PresentPO2","PresentPO2"],["PresentPO1","PresentPO1"],["PresentPO2","PresentPO1"],["PresentPO1","PresentPO2"]], "L":[["PresentPO2",["h","pf"]],["PresentPO1",["h","pl"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["GoFatherHomePO1"], "E":["GoFatherHomePO1"], "Ref":[["GoFatherHomePO1","GoFatherHomePO1"]], "pre":[["GoFatherHomePO1",["h"]]], "post":[["GoFatherHomePO1",["l", "¬h"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["GoFatherHomePO2"], "E":["GoFatherHomePO2"], "Ref":[["GoFatherHomePO2","GoFatherHomePO2"]], "pre":[["GoFatherHomePO2",["h"]]], "post":[["GoFatherHomePO2",["f", "¬h"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["GoFatherPO2Home"], "E":["GoFatherPO2Home"], "Ref":[["GoFatherPO2Home","GoFatherPO2Home"]], "pre":[["GoFatherPO2Home",["f"]]], "post":[["GoFatherPO2Home",["h", "¬f"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["GoFatherPO1Home"], "E":["GoFatherPO1Home"], "Ref":[["GoFatherPO1Home","GoFatherPO1Home"]], "pre":[["GoFatherPO1Home",["l"]]], "post":[["GoFatherPO1Home",["h", "¬l"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["GoFatherPO2PO1"], "E":["GoFatherPO2PO1"], "Ref":[["GoFatherPO2PO1","GoFatherPO2PO1"]], "pre":[["GoFatherPO2PO1",["f"]]], "post":[["GoFatherPO2PO1",["l", "¬f"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["GoFatherPO1PO2"], "E":["GoFatherPO1PO2"], "Ref":[["GoFatherPO1PO2","GoFatherPO1PO2"]], "pre":[["GoFatherPO1PO2",["l"]]], "post":[["GoFatherPO1PO2",["f", "¬l"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["TryPickUpPresentPO1","TryPickUpPresentPO1fails"], "E":["TryPickUpPresentPO1","TryPickUpPresentPO1fails"], "Ref":[["TryPickUpPresentPO1","TryPickUpPresentPO1"],["TryPickUpPresentPO1fails","TryPickUpPresentPO1fails"]], "pre":[["TryPickUpPresentPO1",["l","pl","¬s"]],["TryPickUpPresentPO1fails",["l","¬s"]]], "post":[["TryPickUpPresentPO1",["s","s1","¬pl"]],["TryPickUpPresentPO1fails",["s1"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["TryPickUpPresentPO2","TryPickUpPresentPO2fails"], "E":["TryPickUpPresentPO2","TryPickUpPresentPO2fails"], "Ref":[["TryPickUpPresentPO2","TryPickUpPresentPO2"],["TryPickUpPresentPO2fails","TryPickUpPresentPO2fails"]], "pre":[["TryPickUpPresentPO2",["f","pf","¬s"]],["TryPickUpPresentPO2fails",["f","¬s"]]], "post":[["TryPickUpPresentPO2",["s","s2","¬pf"]],["TryPickUpPresentPO2fails",["s2"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["WrapPresent"], "E":["WrapPresent"], "Ref":[["WrapPresent","WrapPresent"]], "pre":[["WrapPresent",["s","s1","s2","¬w"]]], "post":[["WrapPresent",["w"]]]}
+h&s&w
+#Opf(h&s&w)
+# Last is the goal: if h & w then s (if the Father is home and the present is wrapped then father has present at home wrapped)
+# I expressed it as a knowledge as it is a stronger assumption then simple literal propositions
+BirthdayPresent-v0

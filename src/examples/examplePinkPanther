@@ -1,0 +1,42 @@
+Search
+# short explanation:
+# This is the Pink Panther thief problem, I just added a Red Fox Policeman.
+# If Red Fox is aware (knows) that Pink Panther is leaving with the diamond it will be caught red-handed!
+# The Pink Panther has to distract the Red fox Policeman by throwing a pebble out of the vault when Pink Panther leaves the vault with the diamond. 
+# If Red Fox is not distracted he will catch the Pink Panther thief.
+# Throw pebble is an event model that has two events in his set of events. The one that is designated do nothing, the other one asserts that ¬d.
+# These two events are indistiguishable to Red Fox.
+#
+# agents:
+# The Pink Panther thief = p
+# The Red Fox = f
+#
+# propositions:
+# outside_vault = o
+# Hand_on_Diamond = d
+# Right = r
+# Left = ¬r
+# Light_inside_vault = l
+# red_fox_outside_vault = f  #RL ENV
+# electricity = e   #RL ENV
+#
+# actions:
+# Take_left = Take_left
+# Take_right = Take_right
+# Flick_light = Flick_light
+# Throw_a_distraction_pebble = Throw_pebble
+# Move(Panther, outside_vault, inside_vault) = MoveIn
+# Move(Panther, inside_vault, outside_vault) = MoveOut
+#
+#{"M":["W","Rmp","Rmf","L"], "Wd":["u"], "W":["u","v"], "Rmp":[["u","u"],["v","v"],["u","v"],["v","u"]], "Rmf":[["u","u"],["v","v"],["u","v"],["v","u"]], "L":[["u",["¬r","o","¬l","¬d"]],["v",["r","o","¬l","¬d"]]]}
+{"M":["W","Rmp","Rmf","L"], "Wd":["u"], "W":["u","v","s","t"], "Rmp":[["u","u"],["v","v"],["u","v"],["v","u"],["s","s"],["t","t"]], "Rmf":[["u","u"],["v","v"],["s","s"],["t","t"]], "L":[["u",["¬r","o","¬l","¬d","f","e"]],["v",["r","o","¬l","¬d","f","e"]],["s",["¬r","o","¬l","¬d","¬f","e"]],["t",["r","o","¬l","¬d","¬f","e"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["Take_left"], "E":["Take_left"], "Rep":[["Take_left","Take_left"]], "Ref":[["Take_left","Take_left"]], "pre":[["Take_left",["¬o","¬d","¬r","l"]]], "post":[["Take_left",["d"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["Take_right"], "E":["Take_right"], "Rep":[["Take_right","Take_right"]], "Ref":[["Take_right","Take_right"]], "pre":[["Take_right",["¬o","¬d","r","l"]]], "post":[["Take_right",["d"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["Throw_pebble"], "E":["Throw_pebble","Throw_pebblef"], "Rep":[["Throw_pebble","Throw_pebble"],["Throw_pebblef","Throw_pebblef"]], "Ref":[["Throw_pebble","Throw_pebble"],["Throw_pebblef","Throw_pebblef"],["Throw_pebble","Throw_pebblef"],["Throw_pebblef","Throw_pebble"]], "pre":[["Throw_pebble",["o","f"]],["Throw_pebblef",["o","f"]]], "post":[["Throw_pebble",[""]],["Throw_pebblef",["¬d"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["Flick_light"], "E":["Flick_light"], "Rep":[["Flick_light","Flick_light"]], "Ref":[["Flick_light","Flick_light"]], "pre":[["Flick_light",["¬o"]]], "post":[["Flick_light",["l"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["MoveIn"], "E":["MoveIn"], "Rep":[["MoveIn","MoveIn"]], "Ref":[["MoveIn","MoveIn"]], "pre":[["MoveIn",["o"]]], "post":[["MoveIn",["¬o"]]]}
+{"Eps":["E","Ref","pre","post"], "Ed":["MoveOut"], "E":["MoveOut"], "Rep":[["MoveOut","MoveOut"]], "Ref":[["MoveOut","MoveOut"]], "pre":[["MoveOut",["¬o"]]], "post":[["MoveOut",["o"]]]}
+Opp(¬(Opf(d))&d&o)
+#¬(Opf(d))&d&o
+# Last is the goal: Pink Panther knows that (Red Fox doesn't know that PP has the diamond at the end, PP has the diamond and that PP is outside the vault).
+PinkPanther-v0
